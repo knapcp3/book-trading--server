@@ -11,7 +11,7 @@ passport.use(new JwtStrategy({
   secretOrKey: JWT_SECRET
 }, async (payload, done) => {
   try {
-    const user = User.findById(payload.sub)
+    const user = await User.findById(payload.sub)
     if (!user) {
       return done(null, false)
     }

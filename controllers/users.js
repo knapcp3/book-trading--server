@@ -1,4 +1,5 @@
 const JWT = require('jsonwebtoken')
+const { pick } = require('lodash')
 
 const User = require('../models/user')
 const { JWT_SECRET } = require('../config')
@@ -12,22 +13,16 @@ module.exports = {
     const { username, password } = req.body
 
     const newUser = new User({ username, password })
-    const user = await newUser.save()
-    const picked = (({ username, _id }) => ({ username, _id }))(user)
-
-    const token = signToken(user)
-
-    res.header('authorization', token).json(picked)
-  },
-
-  logIn: async (req, res, next) => {
-    const user = req.user
+    const user = pick(await newUser.save(), ['username', '_id'])
     const token = signToken(user)
 
     res.header('authorization', token).json(user)
   },
 
-  secret: async (req, res, next) => {
-    res.json({ ok: true })
+  logIn: async (req, res, next) => {
+    const user = pick(req.user, ['username', '_id'])
+    const token = signToken(user)
+
+    res.header('authorization', token).json(user)
   }
 }
