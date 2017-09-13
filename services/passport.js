@@ -11,9 +11,7 @@ passport.use(new JwtStrategy({
 }, async (payload, done) => {
   try {
     const user = await User.findById(payload.sub)
-    if (!user) {
-      return done(null, false)
-    }
+    if (!user) return done(null, false)
     done(null, user)
   } catch (error) {
     done(error, false)
@@ -23,14 +21,10 @@ passport.use(new JwtStrategy({
 passport.use(new LocalStrategy({}, async (username, password, done) => {
   try {
     const user = await User.findOne({ username })
-    if (!user) {
-      return done(null, false)
-    }
+    if (!user) return done(null, false)
 
     const isMatch = await user.isValidPassword(password)
-    if (!isMatch) {
-      return done(null, false)
-    }
+    if (!isMatch) return done(null, false)
 
     done(null, user)
   } catch (error) {

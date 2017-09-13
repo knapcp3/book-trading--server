@@ -3,9 +3,8 @@ const { pick } = require('lodash')
 
 const User = require('../models/user')
 
-const signToken = user => {
-  return JWT.sign({ sub: user._id }, process.env.JWT_SECRET)
-}
+const createToken = user =>
+  JWT.sign({ sub: user._id }, process.env.JWT_SECRET)
 
 module.exports = {
   signUp: async (req, res, next) => {
@@ -13,14 +12,14 @@ module.exports = {
 
     const newUser = new User({ username, password })
     const user = pick(await newUser.save(), ['username', '_id'])
-    const token = signToken(user)
+    const token = createToken(user)
 
     res.header('authorization', token).json(user)
   },
 
   logIn: async (req, res, next) => {
     const user = pick(req.user, ['username', '_id'])
-    const token = signToken(user)
+    const token = createToken(user)
 
     res.header('authorization', token).json(user)
   }
