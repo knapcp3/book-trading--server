@@ -10,7 +10,4 @@ router.route('/signup')
 router.route('/login')
   .post(passport.authenticate('local', { session: false }), UsersController.logIn)
 
-router.route('/secret')
-  .get(UsersController.secret)
-
 module.exports = router

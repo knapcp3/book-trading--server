@@ -1,9 +1,12 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load()
+}
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/book-trading')
+mongoose.connect(process.env.MONGOLAB_URI)
 
 const app = express()
 

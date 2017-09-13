@@ -2,10 +2,9 @@ const JWT = require('jsonwebtoken')
 const { pick } = require('lodash')
 
 const User = require('../models/user')
-const { JWT_SECRET } = require('../config')
 
 const signToken = user => {
-  return JWT.sign({ sub: user._id }, JWT_SECRET)
+  return JWT.sign({ sub: user._id }, process.env.JWT_SECRET)
 }
 
 module.exports = {
