@@ -11,5 +11,9 @@ app.use(bodyParser.json())
 
 app.use('/users', require('./routes/users'))
 
+app.use((err, req, res, next) => {
+  res.status(400).json({ error: err.message })
+})
+
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server up on port ${port}!`))
