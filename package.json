@@ -8,6 +8,9 @@
     "dev": "nodemon app.js --exec 'npm run lint && node'",
     "lint": "eslint ."
   },
+  "engines": {
+    "node": "8.4.0"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
