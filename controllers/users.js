@@ -21,7 +21,10 @@ module.exports = {
   },
 
   logIn: async (req, res, next) => {
-    res.json({ ok: true })
+    const user = req.user
+    const token = signToken(user)
+
+    res.header('authorization', token).json(user)
   },
 
   secret: async (req, res, next) => {
