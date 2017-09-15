@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.MONGOLAB_URI)
@@ -11,6 +12,8 @@ mongoose.connect(process.env.MONGOLAB_URI)
 const app = express()
 
 app.use(bodyParser.json())
+app.use(cors())
+app.options('*', cors())
 
 app.use('/users', require('./routes/users'))
 
