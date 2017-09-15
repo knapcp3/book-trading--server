@@ -12,13 +12,17 @@ mongoose.connect(process.env.MONGOLAB_URI)
 const app = express()
 
 app.use(bodyParser.json())
-app.use(cors())
-app.options('*', cors())
+const corsOptions = {
+  origin: process.env.CLIENT_ORIGIN,
+  allowedHeaders: ['Accept-Version', 'Authorization', 'Credentials', 'Content-Type'],
+  exposedHeaders: ['Authorization']
+}
+app.all('*', cors(corsOptions))
 
 app.use('/users', require('./routes/users'))
 
 app.use((err, req, res, next) =>
   res.status(400).json({ error: err.message }))
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 app.listen(port, () => console.log(`Server up on port ${port}!`))

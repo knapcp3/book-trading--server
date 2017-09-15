@@ -14,13 +14,13 @@ module.exports = {
     const user = pick(await newUser.save(), ['username', '_id'])
     const token = createToken(user)
 
-    res.header('authorization', token).json(user)
+    res.set('Authorization', token).json(user)
   },
 
   logIn: async (req, res, next) => {
     const user = pick(req.user, ['username', '_id'])
     const token = createToken(user)
 
-    res.header('authorization', token).json(user)
+    res.set('Authorization', token).json(user)
   }
 }
