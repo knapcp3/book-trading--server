@@ -21,8 +21,8 @@ app.all('*', cors(corsOptions))
 
 app.use('/users', require('./routes/users'))
 
-app.use((err, req, res, next) =>
-  res.status(400).json({ error: err.message }))
+app.use(({ code, message }, req, res, next) =>
+  res.status(400).json({ code, message }))
 
 const port = process.env.PORT
 app.listen(port, () => console.log(`Server up on port ${port}!`))
