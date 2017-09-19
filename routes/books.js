@@ -11,4 +11,10 @@ router.route('/add')
 router.route('/remove')
   .delete(passportJWT, BooksController.remove)
 
+router.route('/all')
+  .get(BooksController.getAll)
+
+router.route('/me')
+  .get(passportJWT, BooksController.getMine)
+
 module.exports = router

@@ -23,5 +23,17 @@ module.exports = {
 
     await book.remove()
     res.send()
+  },
+
+  getAll: async (req, res, next) => {
+    const books = await Book.find({}, { __v: 0 }).sort('-_id')
+
+    res.json({ books })
+  },
+
+  getMine: async (req, res, next) => {
+    const books = await Book.find({ owner: req.user._id }, { __v: 0 }).sort('-_id')
+
+    res.json({ books })
   }
 }
