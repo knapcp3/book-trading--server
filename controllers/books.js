@@ -7,6 +7,21 @@ module.exports = {
 
     const { _id, title, owner, author, image } = await newBook.save()
 
-    res.send({ _id, title, owner, author, image })
+    res.json({ _id, title, owner, author, image })
+  },
+
+  remove: async (req, res, next) => {
+    const { _id } = req.body
+
+    const book = await Book.findById(_id)
+
+    if (!book) res.send()
+
+    if (req.user._id.toString() === book.owner.toString()) {
+      throw new Error('Unauthorized')
+    }
+
+    await book.remove()
+    res.send()
   }
 }
