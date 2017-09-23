@@ -17,9 +17,9 @@ module.exports = {
 
     if (!book) res.send()
 
-    if (req.user._id.toString() === book.owner.toString()) {
-      throw new Error('Unauthorized')
-    }
+    // if (req.user._id.toString() === book.owner.toString()) {
+    //   throw new Error('Unauhorized')
+    // }
 
     await book.remove()
     res.send()
