@@ -24,6 +24,7 @@ app.use('/books', require('./routes/books'))
 app.use('/requests', require('./routes/requests'))
 
 app.use(({ code, message }, req, res, next) => {
+  console.log(message)
   res.status(400).json({ code, message })
 })
 
