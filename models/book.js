@@ -8,7 +8,8 @@ const bookSchema = new Schema({
   },
   author: String,
   image: String,
-  owner: Schema.Types.ObjectId
+  ownerId: Schema.Types.ObjectId,
+  ownerUsername: String
 })
 
 const Book = mongoose.model('book', bookSchema)

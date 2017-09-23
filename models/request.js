@@ -3,11 +3,11 @@ const Schema = mongoose.Schema
 
 const requestSchema = new Schema({
   to: {
-    username: {
-      type: String,
+    _id: {
+      type: Schema.Types.ObjectId,
       required: true
     },
-    _id: {
+    username: {
       type: Schema.Types.ObjectId,
       required: true
     }

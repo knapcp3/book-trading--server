@@ -3,11 +3,12 @@ const Book = require('../models/book')
 module.exports = {
   add: async (req, res, next) => {
     const newBook = new Book(req.body)
-    newBook.owner = req.user._id
+    newBook.ownerId = req.user._id
+    newBook.ownerUsername = req.user.username
 
-    const { _id, title, owner, author, image } = await newBook.save()
+    const { _id, title, ownerId, ownerUsername, author, image } = await newBook.save()
 
-    res.json({ _id, title, owner, author, image })
+    res.json({ _id, title, ownerId, ownerUsername, author, image })
   },
 
   remove: async (req, res, next) => {
