@@ -8,7 +8,7 @@ const requestSchema = new Schema({
       required: true
     },
     username: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true
     }
   },
