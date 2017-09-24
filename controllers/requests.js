@@ -6,6 +6,15 @@ module.exports = {
       throw new Error('You own this book.')
     }
 
+    const sameRequest = await Request.find({ $and: [
+      { 'from._id': req.user._id },
+      { book: req.body.book }
+    ] })
+
+    if (sameRequest) {
+      throw new Error('Already requested this book.')
+    }
+
     const newRequest = new Request(req.body)
 
     const request = await newRequest.save()
