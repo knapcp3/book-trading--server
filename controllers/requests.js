@@ -11,7 +11,7 @@ module.exports = {
       { book: req.body.book }
     ] })
 
-    if (sameRequest) {
+    if (sameRequest.length > 0) {
       throw new Error('Already requested this book.')
     }
 

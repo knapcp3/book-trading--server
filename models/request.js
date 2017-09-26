@@ -25,7 +25,13 @@ const requestSchema = new Schema({
   book: {
     type: Schema.Types.ObjectId,
     required: true
-  }
+  },
+  createdAt: Date
+})
+
+requestSchema.pre('save', function (next) {
+  this.createdAt = new Date().getTime()
+  next()
 })
 
 const Request = mongoose.model('request', requestSchema)
