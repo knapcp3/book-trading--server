@@ -11,4 +11,10 @@ router.route('/new')
 router.route('/me')
   .get(passportJWT, RequestsController.getUsersRequests)
 
+router.route('/accept')
+  .post(passportJWT, RequestsController.accept)
+
+router.route('/decline')
+  .delete(passportJWT, RequestsController.decline)
+
 module.exports = router
