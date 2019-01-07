@@ -2,6 +2,8 @@ const Book = require('../models/book')
 
 module.exports = {
   add: async (req, res, next) => {
+    // console.log(req.body)
+    // console.log(req.user)
     const newBook = new Book(req.body)
     newBook.ownerId = req.user._id
     newBook.ownerUsername = req.user.username
@@ -27,6 +29,9 @@ module.exports = {
   },
 
   getAll: async (req, res, next) => {
+    // console.log('XDD')
+    // res.json({books: [{'XD': 'XDDDD'}]})
+
     const books = await Book.find({}, { __v: 0 }).sort('-_id')
 
     res.json({ books })

@@ -7,6 +7,7 @@ const passportJWT = passport.authenticate('jwt', { session: false })
 
 router.route('/add')
   .post(passportJWT, BooksController.add)
+// .post(BooksController.add)
 
 router.route('/remove')
   .delete(passportJWT, BooksController.remove)

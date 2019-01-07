@@ -17,6 +17,8 @@ module.exports = {
     const user = pick(await newUser.save(), ['username', '_id'])
     const token = createToken(user)
 
+    // console.log(token)
+    // res.set('Access-Control-Expose-Headers', 'Authorization')
     res.set('Authorization', token).json(user)
   },
 
@@ -24,6 +26,7 @@ module.exports = {
     const user = pick(req.user, ['username', '_id'])
     const token = createToken(user)
 
+    // res.set('Access-Control-Expose-Headers', 'Authorization')
     res.set('Authorization', token).json(user)
   }
 }
